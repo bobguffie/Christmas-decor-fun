@@ -1,0 +1,8 @@
+{
+  "name": "Yuletide Atelier — Christmas Decorator",
+  "description": "A 4-level interactive HTML5 Canvas Christmas decoration game with custom bauble painting, personalized family stockings, snowflake window stickers, and illuminated winter gardens.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
