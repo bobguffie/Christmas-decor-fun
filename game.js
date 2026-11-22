@@ -163,11 +163,100 @@ class SoundFX {
   }
 }
 
+class ChristmasMusicPlayer {
+  constructor(soundFX) {
+    this.sound = soundFX;
+    this.enabled = true;
+    this.timerId = null;
+    this.noteIndex = 0;
+
+    this.NOTES = {
+      C4: 261.63, D4: 293.66, E4: 329.63, F4: 349.23, G4: 392.00, A4: 440.00, B4: 493.88,
+      C5: 523.25, D5: 587.33, E5: 659.25, F5: 698.46, G5: 783.99, A5: 880.00, B5: 987.77,
+      C6: 1046.50, REST: 0
+    };
+
+    this.MELODIES = {
+      menu: [
+        ['E5', 0.4], ['E5', 0.4], ['E5', 0.8],
+        ['E5', 0.4], ['E5', 0.4], ['E5', 0.8],
+        ['E5', 0.4], ['G5', 0.4], ['C5', 0.4], ['D5', 0.4], ['E5', 1.6]
+      ],
+      level0: [ // Jingle Bells
+        ['E5', 0.3], ['E5', 0.3], ['E5', 0.6],
+        ['E5', 0.3], ['E5', 0.3], ['E5', 0.6],
+        ['E5', 0.3], ['G5', 0.3], ['C5', 0.45], ['D5', 0.15], ['E5', 1.2],
+        ['F5', 0.3], ['F5', 0.3], ['F5', 0.45], ['F5', 0.15], ['F5', 0.3], ['E5', 0.3], ['E5', 0.3], ['E5', 0.15], ['E5', 0.15],
+        ['E5', 0.3], ['D5', 0.3], ['D5', 0.3], ['E5', 0.3], ['D5', 0.6], ['G5', 0.6]
+      ],
+      level1: [ // We Wish You A Merry Christmas
+        ['G4', 0.4], ['C5', 0.4], ['C5', 0.2], ['D5', 0.2], ['C5', 0.2], ['B4', 0.2], ['A4', 0.4], ['A4', 0.4],
+        ['A4', 0.4], ['D5', 0.4], ['D5', 0.2], ['E5', 0.2], ['D5', 0.2], ['C5', 0.2], ['B4', 0.4], ['G4', 0.4],
+        ['G4', 0.4], ['E5', 0.4], ['E5', 0.2], ['F5', 0.2], ['E5', 0.2], ['D5', 0.2], ['C5', 0.4], ['A4', 0.4],
+        ['G4', 0.3], ['G4', 0.3], ['A4', 0.4], ['D5', 0.4], ['B4', 0.4], ['C5', 1.2]
+      ],
+      level2: [ // Deck the Halls
+        ['G5', 0.6], ['F5', 0.2], ['E5', 0.4], ['D5', 0.4], ['C5', 0.8], ['D5', 0.4], ['E5', 0.4], ['C5', 0.4],
+        ['D5', 0.2], ['E5', 0.2], ['F5', 0.2], ['G5', 0.2], ['E5', 0.4], ['D5', 0.6], ['C5', 1.2],
+        ['G5', 0.6], ['F5', 0.2], ['E5', 0.4], ['D5', 0.4], ['C5', 0.8], ['D5', 0.4], ['E5', 0.4], ['C5', 0.4],
+        ['D5', 0.4], ['E5', 0.4], ['D5', 0.4], ['C5', 1.6]
+      ],
+      level3: [ // Silent Night
+        ['G5', 0.8], ['A5', 0.4], ['G5', 0.8], ['E5', 2.0],
+        ['G5', 0.8], ['A5', 0.4], ['G5', 0.8], ['E5', 2.0],
+        ['D6', 1.2], ['D6', 0.4], ['B5', 2.0],
+        ['C6', 1.2], ['C6', 0.4], ['G5', 2.0]
+      ]
+    };
+
+    this.startLoop();
+  }
+
+  startLoop() {
+    const playNextNote = () => {
+      if (!this.enabled || !this.sound || !this.sound.enabled) {
+        this.timerId = setTimeout(playNextNote, 400);
+        return;
+      }
+
+      let melodyKey = 'menu';
+      if (window.yuletideGame) {
+        const game = window.yuletideGame;
+        if (game.state === GAME_STATES.PLAYING || game.state === GAME_STATES.DESIGNING) {
+          melodyKey = `level${game.activeLevelIndex}`;
+        }
+      }
+
+      const melody = this.MELODIES[melodyKey] || this.MELODIES.menu;
+      const notePair = melody[this.noteIndex % melody.length];
+      this.noteIndex = (this.noteIndex + 1) % melody.length;
+
+      const [noteName, duration] = notePair;
+      const freq = this.NOTES[noteName];
+      if (freq && freq > 0) {
+        this.sound.playTone(freq, duration * 0.85, 'triangle', 0.045);
+      }
+
+      this.timerId = setTimeout(playNextNote, duration * 1000);
+    };
+
+    playNextNote();
+  }
+
+  stop() {
+    if (this.timerId) {
+      clearTimeout(this.timerId);
+      this.timerId = null;
+    }
+  }
+}
+
 class ChristmasDecoratorGame {
   constructor() {
     this.canvas = document.getElementById('gameCanvas');
     this.ctx = this.canvas.getContext('2d');
     this.sound = new SoundFX();
+    this.music = new ChristmasMusicPlayer(this.sound);
 
     this.destroyed = false;
     this.rafId = null;
@@ -222,6 +311,7 @@ class ChristmasDecoratorGame {
       hudTitle: document.getElementById('hudTitle'),
       hudMeta: document.getElementById('hudMeta'),
       btnAudio: document.getElementById('btnAudio'),
+      btnMusic: document.getElementById('btnMusic'),
       btnUndo: document.getElementById('btnUndo'),
       btnClearLevel: document.getElementById('btnClearLevel'),
       btnTakePhoto: document.getElementById('btnTakePhoto'),
@@ -467,6 +557,15 @@ class ChristmasDecoratorGame {
       if (this.sound.enabled) this.sound.playChime();
     });
 
+    this.dom.btnMusic.addEventListener('click', () => {
+      if (this.music) {
+        this.music.enabled = !this.music.enabled;
+        this.dom.btnMusic.textContent = this.music.enabled ? 'Music On' : 'Music Off';
+        this.dom.btnMusic.setAttribute('aria-pressed', String(this.music.enabled));
+        if (this.music.enabled) this.sound.playChime();
+      }
+    });
+
     this.dom.btnUndo.addEventListener('click', () => this.undoLastAction());
     this.dom.btnClearLevel.addEventListener('click', () => this.resetActiveLevel());
     this.dom.btnTakePhoto.addEventListener('click', () => this.takePhoto());
@@ -519,6 +618,9 @@ class ChristmasDecoratorGame {
   destroy() {
     this.saveProgress();
     this.destroyed = true;
+    if (this.music) {
+      this.music.stop();
+    }
     if (this.rafId !== null) {
       cancelAnimationFrame(this.rafId);
       this.rafId = null;

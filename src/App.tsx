@@ -39,6 +39,9 @@ export default function App() {
             <button type="button" id="btnAudio" className="hud-btn hud-btn-ghost" aria-pressed="true">
               Sound On
             </button>
+            <button type="button" id="btnMusic" className="hud-btn hud-btn-ghost" aria-pressed="true">
+              Music On
+            </button>
             <button type="button" id="btnUndo" className="hud-btn hud-btn-ghost hidden">
               Undo
             </button>
