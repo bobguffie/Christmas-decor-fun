@@ -639,3 +639,80 @@ a.hud-btn {
     padding: 14px;
   }
 }
+
+/* Expanded Studios (Levels 5-11) */
+.canvas-frame-pixel {
+  padding: 10px;
+  background: repeating-conic-gradient(#1f3931 0% 25%, #162b24 0% 50%) 50% / 12px 12px;
+}
+
+.tile-canvas-zoom {
+  width: 192px !important;
+  height: 192px !important;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  border: 1px solid rgba(212, 163, 83, 0.45);
+}
+
+.studio-dual-canvases {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.studio-canvas-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 30px);
+  grid-template-rows: repeat(6, 30px);
+  gap: 3px;
+  padding: 8px;
+  background: rgba(8, 18, 15, 0.72);
+  border: 1px solid rgba(212, 163, 83, 0.35);
+  border-radius: 10px;
+  touch-action: none;
+}
+
+.matrix-cell {
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.08s ease;
+}
+
+.matrix-cell:hover {
+  transform: scale(1.08);
+}
+
+.range-control {
+  width: 100%;
+  accent-color: var(--accent-gold);
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .matrix-grid {
+    grid-template-columns: repeat(8, 24px);
+    grid-template-rows: repeat(6, 24px);
+  }
+  .matrix-cell {
+    width: 24px;
+    height: 24px;
+  }
+  .tile-canvas-zoom {
+    width: 160px !important;
+    height: 160px !important;
+  }
+}
+

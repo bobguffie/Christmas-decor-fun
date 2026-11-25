@@ -32,7 +32,7 @@ export default function App() {
 
           <div className="hud-center">
             <h1 id="hudTitle" className="hud-title">Christmas Decorating Fun</h1>
-            <span id="hudMeta" className="hud-meta">4 Festive Scenes</span>
+            <span id="hudMeta" className="hud-meta">11 Festive Scenes</span>
           </div>
 
           <div className="hud-right">
@@ -295,6 +295,399 @@ export default function App() {
             <div className="modal-footer">
               <button type="button" id="btnClearSleigh" className="hud-btn hud-btn-ghost">Clear Paint</button>
               <button type="button" id="btnSaveSleigh" className="hud-btn hud-btn-primary">Save to Garden</button>
+            </div>
+          </div>
+
+          <div id="toyWorkshopStudio" className="studio-panel hidden">
+            <div className="studio-toolbar">
+              <div className="tool-group">
+                <span className="tool-label">Toy Silhouette</span>
+                <div className="segmented-group" id="toyShapeGroup">
+                  <button type="button" className="seg-btn active" data-shape="teddy">Teddy Bear</button>
+                  <button type="button" className="seg-btn" data-shape="train">Wooden Train</button>
+                  <button type="button" className="seg-btn" data-shape="robot">Robot</button>
+                </div>
+              </div>
+              <div className="tool-group">
+                <span className="tool-label">Wood / Plush Base</span>
+                <div className="swatch-row" id="toyBaseSwatches" />
+              </div>
+              <div className="tool-group tool-group-grow">
+                <label htmlFor="toyNameInput" className="tool-label">Name Tag String</label>
+                <input
+                  type="text"
+                  id="toyNameInput"
+                  className="text-input"
+                  maxLength={14}
+                  defaultValue="For Leo"
+                  placeholder="Enter tag name..."
+                  autoComplete="off"
+                />
+              </div>
+            </div>
+
+            <div className="studio-workspace">
+              <div className="canvas-frame">
+                <canvas id="toyCanvas" width={340} height={320} />
+              </div>
+              <div className="brush-sidebar">
+                <div className="tool-group">
+                  <span className="tool-label">Tap Canvas Stencil</span>
+                  <div className="segmented-group" id="toyStencilGroup">
+                    <button type="button" className="seg-btn active" data-stencil="none">Brush</button>
+                    <button type="button" className="seg-btn" data-stencil="star">Star Stamp</button>
+                    <button type="button" className="seg-btn" data-stencil="heart">Heart Stamp</button>
+                    <button type="button" className="seg-btn" data-stencil="dots">Dots Stamp</button>
+                  </div>
+                </div>
+                <div className="tool-group">
+                  <span className="tool-label">Paint Color</span>
+                  <div className="swatch-grid" id="toyColorSwatches" />
+                </div>
+                <div className="tool-group">
+                  <span className="tool-label">Brush Size</span>
+                  <div className="segmented-group" id="toySizeGroup">
+                    <button type="button" className="seg-btn" data-size="4">Fine</button>
+                    <button type="button" className="seg-btn active" data-size="9">Med</button>
+                    <button type="button" className="seg-btn" data-size="16">Bold</button>
+                    <button type="button" className="seg-btn" data-eraser="true">Erase</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="modal-footer">
+              <button type="button" id="btnClearToy" className="hud-btn hud-btn-ghost">Clear Paint</button>
+              <button type="button" id="btnSaveToy" className="hud-btn hud-btn-primary">Send to Workshop</button>
+            </div>
+          </div>
+
+          <div id="bakeryStudio" className="studio-panel hidden">
+            <div className="studio-toolbar">
+              <div className="tool-group">
+                <span className="tool-label">Cookie Cutter</span>
+                <div className="segmented-group" id="cookieShapeGroup">
+                  <button type="button" className="seg-btn active" data-shape="gingerbread_man">Gingerbread</button>
+                  <button type="button" className="seg-btn" data-shape="star_cookie">Star</button>
+                  <button type="button" className="seg-btn" data-shape="tree_cookie">Tree</button>
+                  <button type="button" className="seg-btn" data-shape="bell_cookie">Bell</button>
+                </div>
+              </div>
+              <div className="tool-group">
+                <span className="tool-label">Dough Bake</span>
+                <div className="swatch-row" id="cookieBakeSwatches" />
+              </div>
+            </div>
+
+            <div className="studio-workspace">
+              <div className="canvas-frame">
+                <canvas id="cookieCanvas" width={320} height={320} />
+              </div>
+              <div className="brush-sidebar">
+                <div className="tool-group">
+                  <span className="tool-label">Royal Icing Color</span>
+                  <div className="swatch-grid" id="cookieIcingSwatches" />
+                </div>
+                <div className="tool-group">
+                  <span className="tool-label">Piping Tip</span>
+                  <div className="segmented-group" id="cookieSizeGroup">
+                    <button type="button" className="seg-btn active" data-size="3">Fine Tip</button>
+                    <button type="button" className="seg-btn" data-size="6">Med Tip</button>
+                    <button type="button" className="seg-btn" data-size="10">Flood</button>
+                    <button type="button" className="seg-btn" data-eraser="true">Erase</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="modal-footer">
+              <button type="button" id="btnClearCookie" className="hud-btn hud-btn-ghost">Clear Icing</button>
+              <button type="button" id="btnSaveCookie" className="hud-btn hud-btn-primary">Bake &amp; Plate</button>
+            </div>
+          </div>
+
+          <div id="stableStudio" className="studio-panel hidden">
+            <div className="studio-toolbar">
+              <div className="tool-group tool-group-grow">
+                <label htmlFor="reindeerNameInput" className="tool-label">Brass Collar Tag Name</label>
+                <input
+                  type="text"
+                  id="reindeerNameInput"
+                  className="text-input"
+                  maxLength={12}
+                  defaultValue="Comet"
+                  placeholder="Reindeer name..."
+                  autoComplete="off"
+                />
+              </div>
+              <div className="tool-group">
+                <span className="tool-label">Quick Weave Preset</span>
+                <div className="segmented-group" id="matrixPresetGroup">
+                  <button type="button" className="seg-btn" data-preset="tartan">Tartan</button>
+                  <button type="button" className="seg-btn" data-preset="chevron">Chevron</button>
+                  <button type="button" className="seg-btn" data-preset="fairisle">Fair Isle</button>
+                </div>
+              </div>
+            </div>
+
+            <div className="studio-workspace">
+              <div className="studio-canvas-col">
+                <span className="tool-label">Weave Matrix (Tap or Drag Cells)</span>
+                <div id="blanketMatrixGrid" className="matrix-grid" />
+              </div>
+              <div className="studio-canvas-col">
+                <span className="tool-label">Blanket &amp; Brass Collar Preview</span>
+                <div className="canvas-frame canvas-frame-dark">
+                  <canvas id="blanketPreviewCanvas" width={300} height={220} />
+                </div>
+              </div>
+            </div>
+
+            <div className="tool-group">
+              <span className="tool-label">Active Wool Yarn Color</span>
+              <div className="swatch-row" id="matrixColorSwatches" />
+            </div>
+
+            <div className="modal-footer">
+              <button type="button" id="btnClearBlanket" className="hud-btn hud-btn-ghost">Reset Weave</button>
+              <button type="button" id="btnSaveBlanket" className="hud-btn hud-btn-primary">Save Harness Set</button>
+            </div>
+          </div>
+
+          <div id="townSquareStudio" className="studio-panel hidden">
+            <div className="studio-toolbar">
+              <div className="tool-group">
+                <span className="tool-label">Signboard Frame</span>
+                <div className="segmented-group" id="signboardShapeGroup">
+                  <button type="button" className="seg-btn active" data-shape="arch">Shop Arch</button>
+                  <button type="button" className="seg-btn" data-shape="banner">Ribbon Crest</button>
+                  <button type="button" className="seg-btn" data-shape="plank">Timber Plank</button>
+                </div>
+              </div>
+              <div className="tool-group tool-group-grow">
+                <label htmlFor="signboardTextInput" className="tool-label">Shop Sign Lettering</label>
+                <input
+                  type="text"
+                  id="signboardTextInput"
+                  className="text-input"
+                  maxLength={18}
+                  defaultValue="Ye Olde Toyshop"
+                  placeholder="Enter shop name..."
+                  autoComplete="off"
+                />
+              </div>
+            </div>
+
+            <div className="studio-toolbar">
+              <div className="tool-group">
+                <span className="tool-label">Signboard Paint</span>
+                <div className="swatch-row" id="signboardBaseSwatches" />
+              </div>
+              <div className="tool-group">
+                <span className="tool-label">Display Window Glow</span>
+                <div className="swatch-row" id="signboardGlowSwatches" />
+              </div>
+              <div className="tool-group tool-group-grow">
+                <label htmlFor="signboardGlowRange" className="tool-label">Window Glow Intensity</label>
+                <input
+                  type="range"
+                  id="signboardGlowRange"
+                  className="range-control"
+                  min="20"
+                  max="100"
+                  defaultValue="85"
+                />
+              </div>
+            </div>
+
+            <div className="studio-workspace">
+              <div className="canvas-frame canvas-frame-dark">
+                <canvas id="signboardCanvas" width={380} height={220} />
+              </div>
+              <div className="brush-sidebar">
+                <div className="tool-group">
+                  <span className="tool-label">Trim &amp; Flourish Ink</span>
+                  <div className="swatch-grid" id="signboardColorSwatches" />
+                </div>
+                <div className="tool-group">
+                  <span className="tool-label">Brush Size</span>
+                  <div className="segmented-group" id="signboardSizeGroup">
+                    <button type="button" className="seg-btn" data-size="4">Fine</button>
+                    <button type="button" className="seg-btn active" data-size="8">Med</button>
+                    <button type="button" className="seg-btn" data-size="14">Bold</button>
+                    <button type="button" className="seg-btn" data-eraser="true">Erase</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="modal-footer">
+              <button type="button" id="btnClearSignboard" className="hud-btn hud-btn-ghost">Clear Flourishes</button>
+              <button type="button" id="btnSaveSignboard" className="hud-btn hud-btn-primary">Hang Signboard</button>
+            </div>
+          </div>
+
+          <div id="launchpadStudio" className="studio-panel hidden">
+            <div className="studio-toolbar">
+              <div className="tool-group tool-group-grow">
+                <label htmlFor="licensePlateInput" className="tool-label">License Plate Text</label>
+                <input
+                  type="text"
+                  id="licensePlateInput"
+                  className="text-input"
+                  maxLength={10}
+                  defaultValue="SANTA-1"
+                  placeholder="NP-25..."
+                  autoComplete="off"
+                />
+              </div>
+              <div className="tool-group">
+                <span className="tool-label">Plate Color</span>
+                <div className="swatch-row" id="launchpadBaseSwatches" />
+              </div>
+              <div className="tool-group">
+                <span className="tool-label">Border Trim</span>
+                <div className="swatch-row" id="launchpadTrimSwatches" />
+              </div>
+            </div>
+
+            <div className="studio-workspace">
+              <div className="canvas-frame canvas-frame-dark">
+                <canvas id="launchpadCanvas" width={380} height={190} />
+              </div>
+              <div className="brush-sidebar">
+                <div className="tool-group">
+                  <span className="tool-label">Plate Paint</span>
+                  <div className="swatch-grid" id="launchpadColorSwatches" />
+                </div>
+                <div className="tool-group">
+                  <span className="tool-label">Brush Size</span>
+                  <div className="segmented-group" id="launchpadSizeGroup">
+                    <button type="button" className="seg-btn" data-size="4">Fine</button>
+                    <button type="button" className="seg-btn active" data-size="8">Med</button>
+                    <button type="button" className="seg-btn" data-size="15">Bold</button>
+                    <button type="button" className="seg-btn" data-eraser="true">Erase</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="modal-footer">
+              <button type="button" id="btnClearLaunchpad" className="hud-btn hud-btn-ghost">Clear Paint</button>
+              <button type="button" id="btnSaveLaunchpad" className="hud-btn hud-btn-primary">Save License Plate</button>
+            </div>
+          </div>
+
+          <div id="wrappingStudio" className="studio-panel hidden">
+            <div className="studio-toolbar">
+              <div className="tool-group">
+                <span className="tool-label">Present Shape</span>
+                <div className="segmented-group" id="wrapShapeGroup">
+                  <button type="button" className="seg-btn active" data-shape="square">Square Box</button>
+                  <button type="button" className="seg-btn" data-shape="cylinder">Cylinder</button>
+                  <button type="button" className="seg-btn" data-shape="plush">Plush Sack</button>
+                </div>
+              </div>
+              <div className="tool-group">
+                <span className="tool-label">Paper Base</span>
+                <div className="swatch-row" id="wrapPaperSwatches" />
+              </div>
+              <div className="tool-group">
+                <span className="tool-label">Ribbon</span>
+                <div className="swatch-row" id="wrapRibbonSwatches" />
+              </div>
+            </div>
+
+            <div className="studio-workspace">
+              <div className="studio-dual-canvases">
+                <div className="studio-canvas-col">
+                  <span className="tool-label">64x64 Pattern Doodle</span>
+                  <div className="canvas-frame canvas-frame-pixel">
+                    <canvas id="wrapTileCanvas" className="tile-canvas-zoom" width={64} height={64} />
+                  </div>
+                </div>
+                <div className="studio-canvas-col">
+                  <span className="tool-label">Seamless Tiled Present</span>
+                  <div className="canvas-frame">
+                    <canvas id="wrapPreviewCanvas" width={240} height={240} />
+                  </div>
+                </div>
+              </div>
+              <div className="brush-sidebar">
+                <div className="tool-group">
+                  <span className="tool-label">Doodle Ink</span>
+                  <div className="swatch-grid" id="wrapColorSwatches" />
+                </div>
+                <div className="tool-group">
+                  <span className="tool-label">Doodle Pen</span>
+                  <div className="segmented-group" id="wrapSizeGroup">
+                    <button type="button" className="seg-btn" data-size="2">Fine</button>
+                    <button type="button" className="seg-btn active" data-size="4">Med</button>
+                    <button type="button" className="seg-btn" data-size="7">Bold</button>
+                    <button type="button" className="seg-btn" data-eraser="true">Erase</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="modal-footer">
+              <button type="button" id="btnClearWrap" className="hud-btn hud-btn-ghost">Clear Pattern</button>
+              <button type="button" id="btnSaveWrap" className="hud-btn hud-btn-primary">Wrap &amp; Add Present</button>
+            </div>
+          </div>
+
+          <div id="dioramaStudio" className="studio-panel hidden">
+            <div className="studio-toolbar">
+              <div className="tool-group">
+                <span className="tool-label">Flag Banner Style</span>
+                <div className="segmented-group" id="flagShapeGroup">
+                  <button type="button" className="seg-btn active" data-shape="pennant">Pennant</button>
+                  <button type="button" className="seg-btn" data-shape="swallowtail">Swallowtail</button>
+                  <button type="button" className="seg-btn" data-shape="royal">Royal Crest</button>
+                </div>
+              </div>
+              <div className="tool-group">
+                <span className="tool-label">Banner Cloth</span>
+                <div className="swatch-row" id="flagBaseSwatches" />
+              </div>
+              <div className="tool-group tool-group-grow">
+                <label htmlFor="flagLabelInput" className="tool-label">Community Emblem Text</label>
+                <input
+                  type="text"
+                  id="flagLabelInput"
+                  className="text-input"
+                  maxLength={14}
+                  defaultValue="North Pole"
+                  placeholder="Flag motto..."
+                  autoComplete="off"
+                />
+              </div>
+            </div>
+
+            <div className="studio-workspace">
+              <div className="canvas-frame canvas-frame-dark">
+                <canvas id="flagCanvas" width={320} height={280} />
+              </div>
+              <div className="brush-sidebar">
+                <div className="tool-group">
+                  <span className="tool-label">Emblem Paint</span>
+                  <div className="swatch-grid" id="flagColorSwatches" />
+                </div>
+                <div className="tool-group">
+                  <span className="tool-label">Brush Size</span>
+                  <div className="segmented-group" id="flagSizeGroup">
+                    <button type="button" className="seg-btn" data-size="4">Fine</button>
+                    <button type="button" className="seg-btn active" data-size="8">Med</button>
+                    <button type="button" className="seg-btn" data-size="14">Bold</button>
+                    <button type="button" className="seg-btn" data-eraser="true">Erase</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="modal-footer">
+              <button type="button" id="btnClearFlag" className="hud-btn hud-btn-ghost">Clear Flag</button>
+              <button type="button" id="btnSaveFlag" className="hud-btn hud-btn-primary">Raise Village Flag</button>
             </div>
           </div>
         </div>
